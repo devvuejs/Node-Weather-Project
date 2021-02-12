@@ -4,6 +4,7 @@ const express= require('express');
 const app = express();
 const publicDir=path.join(__dirname,'../public');
 const viewsPath= path.join(__dirname,'../templates')
+const port = process.env.PORT || 3000;
 app.set('view engine','hbs');
 app.set('views',viewsPath)
 app.get('',(req,res)=>{
@@ -15,11 +16,8 @@ app.get('',(req,res)=>{
 
 app.use(express.static(publicDir));
 
-
-
-
 app.get('',(req,res)=>{
-   res.send("Hello Express")
+   res.send("Hello Express");
 });
 app.get('/help',(req,res)=>{
     res.send([{name:'Devsur'},{name:'Test1'},{name:'test3'}])
@@ -28,10 +26,6 @@ app.get('/weather',(req,res)=>{
     if(!req.query.address) {
     return res.send('Please provide address params')
     }
-    req.send({
-        
-    })
-}
 });
 app.get('/products',(req,res)=>{
     console.log(req.query)
@@ -42,6 +36,6 @@ app.get('/products',(req,res)=>{
 app.get('/about',(req,res)=>{
     res.send("about Page")
 });
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log("the server is listening on port 3000")
 })
